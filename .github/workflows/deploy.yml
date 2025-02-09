@@ -1,0 +1,61 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Trigger the deployment when changes are pushed to the `main` branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 1  # This fetches only the latest commit for faster builds
+
+      # Step 2: Set up Node.js (adjust to your Node.js version if necessary)
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'  # You can change this to the version compatible with your project
+
+      # Step 3: Install dependencies (run npm install for a Node.js project)
+      - name: Install dependencies
+        run: npm install
+
+      # Step 4: Build the project
+      - name: Build project
+        run: npm run build  # Use the build command that suits your framework (e.g., React, Vue)
+
+      # Step 5: Create a GitHub Pages branch and deploy
+      - name: Deploy to GitHub Pages
+        run: |
+          # Create the `gh-pages` branch if it doesn't exist already
+          git checkout -b gh-pages
+          
+          # Delete the old files on `gh-pages` branch to ensure a clean slate
+          git rm -rf .
+          
+          # Copy build files to the root of the `gh-pages` branch
+          cp -R ./build/* .  # Adjust if your framework uses a different build directory (e.g., `dist`)
+
+          # Stage the changes and commit them
+          git add .
+          git commit -m "Deploy to GitHub Pages"
+
+          # Push the `gh-pages` branch to GitHub
+          git push --force origin gh-pages
+
+      # Optional Step: (Setting up CNAME if using a custom domain)
+      - name: Set up CNAME file for custom domain
+        run: echo "www.yourcustomdomain.com" > CNAME  # Replace with your domain
+
+      # Step 6: Push the `CNAME` file to GitHub Pages if using a custom domain
+      - name: Push CNAME to GitHub Pages
+        run: |
+          git add CNAME
+          git commit -m "Add custom domain"
+          git push --force origin gh-pages

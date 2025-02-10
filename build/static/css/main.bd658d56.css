@@ -1,1 +1,2 @@
-
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;margin:0}code{font-family:source-code-pro,Menlo,Monaco,Consolas,Courier New,monospace}.imgContainer{position:fixed;width:50%}.img-floppy{box-shadow:6px 7px 20px;display:block;width:134px}.overlay{background-color:#008cba;bottom:0;cursor:grab;height:100%;left:0;opacity:0;position:absolute;right:0;top:0;transition:.5s ease;width:134px}.imgContainer:hover .overlay{opacity:1}.text{color:#fff;cursor:grab;font-size:20px;left:50%;position:absolute;text-align:center;top:50%;transform:translate(-50%,-50%)}
+/*# sourceMappingURL=main.bd658d56.css.map*/
